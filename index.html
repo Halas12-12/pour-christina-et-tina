@@ -11,6 +11,7 @@
 :root {
   color-scheme: dark;
   --rose: #ffd7e5;
+  --screen: 100dvh;
 }
 
 * {
@@ -18,9 +19,9 @@
 }
 
 html, body {
-  margin: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
   overflow: hidden;
   overscroll-behavior: none;
 }
@@ -32,13 +33,12 @@ body {
   font-family: Georgia, serif;
 }
 
-/* VIDEO EN ARRIERE-PLAN */
+/* VIDEO EN FOND */
 .background-video {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  height: 100dvh;
   object-fit: cover;
   z-index: -2;
   pointer-events: none;
@@ -52,68 +52,80 @@ body {
   pointer-events: none;
 }
 
-/* APPLICATION SANS DEFILEMENT GLOBAL */
 .app {
   position: relative;
   width: 100%;
   height: 100vh;
-  height: 100dvh;
+  height: var(--screen);
   overflow: hidden;
 }
 
-/* PAGE D'ACCUEIL */
+/* ACCUEIL */
 .welcome {
   position: absolute;
   inset: 0;
   display: flex;
-  justify-content: center;
   align-items: flex-end;
-  padding: 20px 16px 5dvh;
+  justify-content: center;
+  padding: 14px 14px 5dvh;
   z-index: 3;
-  transition: opacity .8s, transform .8s;
+  transition: opacity .75s ease, transform .75s ease;
 }
 
 .welcome-card {
   width: min(100%, 700px);
-  text-align: center;
-  padding: 25px 20px;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: clamp(16px, 3vw, 26px);
   border-radius: 22px;
-  background: rgba(20, 9, 25, .35);
+  text-align: center;
+  background: rgba(20, 9, 25, .36);
   border: 1px solid rgba(255, 220, 235, .25);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .eyebrow {
-  font: 12px Arial, sans-serif;
-  letter-spacing: .2em;
+  font: 11px Arial, sans-serif;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--rose);
 }
 
 h1 {
+  margin: 14px 0;
   color: var(--rose);
-  font-size: clamp(2rem, 7vw, 4.5rem);
-  margin: 15px 0;
+  font-size: clamp(1.8rem, 7vw, 4.5rem);
 }
 
 .subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  line-height: 1.6;
-  margin: 15px auto 22px;
+  max-width: 570px;
+  margin: 14px auto 22px;
+  font-size: clamp(.95rem, 2.5vw, 1.25rem);
+  line-height: 1.55;
 }
 
 button {
+  min-height: 40px;
   border: 1px solid #ffd6e4;
   border-radius: 40px;
   background: #edb4c9;
   color: #29111e;
-  padding: 12px 20px;
-  cursor: pointer;
+  padding: 10px 16px;
   font-size: 14px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:hover {
   background: #ffe1eb;
+}
+
+button:focus-visible,
+.letter-scroll:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .app.opened .welcome {
@@ -122,70 +134,65 @@ button:hover {
   pointer-events: none;
 }
 
-/*
-  DEUX CARRES IDENTIQUES.
-
-  Chaque carré mesure au maximum :
-  - la moitié de la hauteur disponible ;
-  - la moitié de la largeur disponible.
-
-  Les deux restent côte à côte.
-*/
+/* DEUX CARRES IDENTIQUES */
 .memory-layout {
-  --gap: clamp(8px, 2vw, 24px);
+  --gap: clamp(6px, 1.8vw, 20px);
+  --margin: clamp(7px, 2vw, 20px);
+  --bottom: 2dvh;
+
   --side: min(
-    48dvh,
-    calc((100vw - 32px - var(--gap)) / 2),
+    46dvh,
+    calc((100vw - 2 * var(--margin) - var(--gap)) / 2),
     440px
   );
 
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 3dvh;
+  bottom: var(--bottom);
 
   display: flex;
-  justify-content: center;
   align-items: flex-end;
+  justify-content: center;
   gap: var(--gap);
-
-  padding: 0 16px;
+  padding: 0 var(--margin);
 
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-
-  transition: opacity .8s, visibility .8s;
+  transition: opacity .8s ease, visibility .8s;
 }
 
 .app.opened .memory-layout {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition-delay: .3s;
+  transition-delay: .25s;
 }
 
-/* CARRE DE TEXTE A GAUCHE */
+/* CARRE DE TEXTE */
 .text-panel {
   width: var(--side);
   height: var(--side);
   flex: 0 0 var(--side);
+  min-width: 0;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
-  min-height: 0;
   overflow: hidden;
 
-  border-radius: 18px;
-  border: 1px solid rgba(255, 220, 235, .3);
-  background: rgba(20, 9, 25, .68);
-  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 220, 235, .35);
+  border-radius: clamp(9px, 1.5vw, 18px);
+  background: rgba(20, 9, 25, .75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
 
   opacity: 0;
-  transform: translateX(-50px);
-  transition: transform 1s, opacity 1s;
+  transform: translateX(-45px);
+  transition: opacity .9s ease, transform .9s ease;
 }
 
 .app.opened .text-panel {
@@ -195,21 +202,21 @@ button:hover {
 
 .text-heading {
   flex-shrink: 0;
+  padding: clamp(7px, 1.4vw, 15px) 5px;
   text-align: center;
-  padding: 14px 10px 10px;
-  border-bottom: 1px solid rgba(255, 220, 235, .2);
+  border-bottom: 1px solid rgba(255, 220, 235, .18);
 }
 
 .text-heading h2 {
   margin: 0;
-  font-size: clamp(.95rem, 2vw, 1.4rem);
+  font-size: clamp(.85rem, 1.8vw, 1.35rem);
   color: var(--rose);
 }
 
 .text-heading small {
   display: block;
   margin-top: 5px;
-  font: 11px Arial, sans-serif;
+  font: clamp(9px, .9vw, 11px) Arial, sans-serif;
   color: #f4d3df;
 }
 
@@ -221,17 +228,17 @@ button:hover {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
-  padding: 8px 20px 22px;
-
+  padding: 5px clamp(9px, 2vw, 22px) 20px;
   scrollbar-width: thin;
   scrollbar-color: #e9a9c0 transparent;
 }
 
 .letter-scroll p {
+  margin: clamp(15px, 2vw, 23px) 0;
   text-align: center;
-  font-size: clamp(.9rem, 1.5vw, 1.12rem);
-  line-height: 1.75;
-  margin: 22px 0;
+  font-size: clamp(.85rem, 1.5vw, 1.12rem);
+  line-height: 1.65;
+  overflow-wrap: break-word;
 }
 
 .highlight {
@@ -244,19 +251,20 @@ button:hover {
   font-style: italic;
 }
 
-/* CARRE PHOTO A DROITE */
+/* CARRE PHOTO */
 .photo-panel {
   width: var(--side);
   height: var(--side);
   flex: 0 0 var(--side);
+  min-width: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   opacity: 0;
-  transform: translateX(-50px) scale(.95);
-  transition: transform 1.1s, opacity 1s;
+  transform: translateX(-45px) scale(.96);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .app.opened .photo-panel {
@@ -264,22 +272,19 @@ button:hover {
   transform: translateX(0) scale(1);
 }
 
-/*
-  AUCUN FOND SUR LA PHOTO.
-  L'IMAGE GARDE SES PROPORTIONS.
-*/
+/* AUCUN FOND AJOUTE AUX PHOTOS */
 .photo-frame {
   width: 100%;
   flex: 1;
   min-height: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
 
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
   border: none;
-  border-radius: 14px;
   box-shadow: none;
   backdrop-filter: none;
 }
@@ -289,7 +294,7 @@ button:hover {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: opacity .35s;
+  transition: opacity .35s ease;
 }
 
 .photo-frame img.fade {
@@ -297,71 +302,49 @@ button:hover {
 }
 
 .photo-controls {
+  height: clamp(32px, 5dvh, 44px);
   flex-shrink: 0;
-  height: 45px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: clamp(3px, 1vw, 12px);
 }
 
 .photo-controls button {
-  padding: 7px 13px;
+  min-height: 30px;
+  padding: 5px 12px;
   font-size: 13px;
 }
 
 .photo-count {
-  min-width: 35px;
-  text-align: center;
+  min-width: 32px;
   font: 12px Arial, sans-serif;
+  text-align: center;
   text-shadow: 0 2px 5px #000;
 }
 
-/* ADAPTATION AUX TELEPHONES */
+/* TELEPHONES */
 @media (max-width: 650px) {
-
-  .welcome {
-    padding: 12px 12px 5dvh;
-  }
-
-  .welcome-card {
-    padding: 20px 14px;
-  }
-
-  .welcome h1 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
-  }
-
-  .welcome .subtitle {
-    font-size: .98rem;
-  }
-
-  .welcome button {
-    font-size: 13px;
-    padding: 12px 15px;
-  }
-
   .memory-layout {
-    --gap: 8px;
+    --gap: 7px;
+    --margin: 7px;
+    --bottom: 3dvh;
     --side: min(
-      47dvh,
-      calc((100vw - 22px - var(--gap)) / 2)
+      46dvh,
+      calc((100vw - 21px) / 2)
     );
-
-    bottom: 5dvh;
-    padding: 0 7px;
   }
 
   .text-panel {
-    border-radius: 12px;
+    background: rgba(20, 9, 25, .82);
   }
 
   .text-heading {
-    padding: 9px 4px 7px;
+    padding: 8px 3px 6px;
   }
 
   .text-heading h2 {
-    font-size: .9rem;
+    font-size: clamp(.78rem, 3.3vw, 1rem);
   }
 
   .text-heading small {
@@ -369,32 +352,87 @@ button:hover {
   }
 
   .letter-scroll {
-    padding: 4px 8px 12px;
+    padding: 3px 7px 12px;
   }
 
   .letter-scroll p {
-    font-size: clamp(.78rem, 3vw, .95rem);
-    line-height: 1.55;
-    margin: 16px 0;
-  }
-
-  .photo-frame {
-    border-radius: 10px;
+    font-size: clamp(.76rem, 3.15vw, .96rem);
+    line-height: 1.5;
+    margin: 15px 0;
   }
 
   .photo-controls {
-    height: 34px;
-    gap: 4px;
+    gap: 3px;
   }
 
   .photo-controls button {
+    min-height: 30px;
     padding: 5px 9px;
     font-size: 12px;
   }
 
   .photo-count {
+    min-width: 27px;
     font-size: 10px;
-    min-width: 28px;
+  }
+}
+
+/* TRES PETITS TELEPHONES */
+@media (max-width: 360px) {
+  .letter-scroll {
+    padding: 3px 5px 10px;
+  }
+
+  .letter-scroll p {
+    font-size: .76rem;
+    line-height: 1.45;
+    margin: 12px 0;
+  }
+
+  .text-heading small {
+    font-size: 8px;
+  }
+
+  .photo-controls button {
+    padding: 4px 7px;
+  }
+}
+
+/* TELEPHONES EN MODE PAYSAGE */
+@media (max-height: 450px) and (orientation: landscape) {
+  .memory-layout {
+    --side: min(
+      44dvh,
+      calc((100vw - 40px) / 2)
+    );
+    --bottom: 2dvh;
+  }
+
+  .text-heading {
+    padding: 5px;
+  }
+
+  .letter-scroll p {
+    margin: 10px 0;
+    line-height: 1.4;
+  }
+
+  .photo-controls {
+    height: 28px;
+  }
+
+  .welcome-card {
+    padding: 10px 16px;
+  }
+
+  .welcome h1 {
+    margin: 5px 0;
+    font-size: 1.6rem;
+  }
+
+  .welcome .subtitle {
+    margin: 7px auto;
+    font-size: .85rem;
   }
 }
 
@@ -408,13 +446,9 @@ button:hover {
 
 <body>
 
-<!-- VIDEO -->
 <video
   class="background-video"
-  autoplay
-  muted
-  loop
-  playsinline
+  autoplay muted loop playsinline
   preload="auto"
   aria-hidden="true">
   <source src="./fond.mp4" type="video/mp4">
@@ -425,8 +459,7 @@ button:hover {
 <main class="app" id="app">
 
   <!-- ACCUEIL -->
-  <section class="welcome">
-
+  <section class="welcome" id="welcome">
     <div class="welcome-card">
 
       <div class="eyebrow">
@@ -446,10 +479,9 @@ button:hover {
       </button>
 
     </div>
-
   </section>
 
-  <!-- DEUX CARRES -->
+  <!-- LES DEUX CARRES -->
   <section class="memory-layout" id="memories">
 
     <!-- TEXTE A GAUCHE -->
@@ -546,7 +578,6 @@ button:hover {
       </div>
 
       <div class="photo-controls">
-
         <button id="prev" type="button"
                 aria-label="Photo précédente">←</button>
 
@@ -556,13 +587,11 @@ button:hover {
 
         <button id="next" type="button"
                 aria-label="Photo suivante">→</button>
-
       </div>
 
     </aside>
 
   </section>
-
 </main>
 
 <script>
@@ -573,6 +602,9 @@ const openButton = document.getElementById("open");
 const img = document.getElementById("photo");
 const count = document.getElementById("count");
 const video = document.querySelector(".background-video");
+const welcome = document.getElementById("welcome");
+const memories = document.getElementById("memories");
+const letterScroll = document.getElementById("letterScroll");
 
 const photos = Array.from(
   { length: 9 },
@@ -583,6 +615,8 @@ let current = 0;
 let timer = null;
 let transitionTimer = null;
 let opened = false;
+
+memories.inert = true;
 
 function showPhoto(index) {
   clearTimeout(transitionTimer);
@@ -595,7 +629,6 @@ function showPhoto(index) {
     img.src = photos[current];
     img.alt = `Souvenir ${current + 1} sur ${photos.length}`;
     count.textContent = `${current + 1} / ${photos.length}`;
-
     img.classList.remove("fade");
   }, 350);
 }
@@ -614,7 +647,9 @@ openButton.addEventListener("click", () => {
   opened = true;
   app.classList.add("opened");
 
-  document.getElementById("letterScroll").scrollTop = 0;
+  memories.inert = false;
+  welcome.inert = true;
+  letterScroll.scrollTop = 0;
 
   startSlideshow();
 });
@@ -629,9 +664,10 @@ document.getElementById("next").addEventListener("click", () => {
   startSlideshow();
 });
 
+/* Lecture de la vidéo */
 video.play().catch(() => {});
 
-/* BLOQUER LE DEFILEMENT HORS DU TEXTE */
+/* Bloquer le défilement hors du texte */
 document.addEventListener("wheel", (event) => {
   if (!event.target.closest(".letter-scroll")) {
     event.preventDefault();
@@ -645,6 +681,5 @@ document.addEventListener("touchmove", (event) => {
 }, { passive: false });
 
 </script>
-
 </body>
 </html>
