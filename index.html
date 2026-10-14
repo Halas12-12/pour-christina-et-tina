@@ -1,14 +1,129 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#160d19"><title>Christina & Tina — Pour vous ❤️</title><style>
-:root{color-scheme:dark}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#160d19;color:#fff7f9;font-family:Georgia,serif}video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.veil{position:fixed;inset:0;background:linear-gradient(180deg,rgba(15,8,19,.79),rgba(15,8,19,.9));z-index:-1}.wrap{max-width:820px;margin:auto;padding:8vh 22px 90px;text-align:center}.eyebrow{letter-spacing:.25em;text-transform:uppercase;font:12px Arial,sans-serif;color:#e8aabf}h1{font-size:clamp(2.6rem,9vw,5.5rem);margin:20px 0;color:#ffe0ea;line-height:1.1}.subtitle{font-size:clamp(1.1rem,3vw,1.4rem);line-height:1.7;max-width:580px;margin:25px auto 35px}button{border:1px solid #f4c7d8;background:#edb4c9;color:#29111e;padding:16px 28px;border-radius:50px;font-size:16px;cursor:pointer}button:hover{background:#ffe2eb}.hidden{display:none}.gallery{margin:45px auto 35px;max-width:480px}.frame{width:100%;height:min(62vh,580px);object-fit:contain;border-radius:20px;background:rgba(0,0,0,.28);box-shadow:0 12px 45px #0009;transition:opacity .5s}.frame.fade{opacity:0}.count{font:13px Arial,sans-serif;color:#e6bdcb;margin:12px}.controls{display:flex;justify-content:center;gap:12px}.controls button{padding:9px 18px}.letter{max-width:670px;margin:55px auto;text-align:center}.letter p{font-size:clamp(1.1rem,2.8vw,1.35rem);line-height:1.95;margin:36px 0}.letter .highlight{font-size:clamp(1.35rem,3.5vw,1.8rem);color:#ffd2e0;font-weight:bold}.signature{color:#ffd2e0;font-style:italic}.footer{font:12px Arial,sans-serif;color:#dbb7c4;margin-top:60px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame{transition:none}}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160d19">
+  <title>Christina & Tina — Pour vous ❤️</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #160d19; color: #fff7f9; font-family: Georgia, serif; }
 
-/* Présentation mobile : vidéo visible, carte basse et translucide */
-.veil{background:linear-gradient(180deg,rgba(15,8,19,.12) 0%,rgba(15,8,19,.24) 55%,rgba(15,8,19,.43) 100%)}
-.hero{min-height:92svh;display:flex;align-items:flex-end;justify-content:center;padding:0 0 7vh}
-.hero-card{width:100%;padding:24px 20px 28px;border:1px solid rgba(255,225,237,.24);border-radius:24px;background:rgba(22,12,28,.36);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);box-shadow:0 12px 36px rgba(0,0,0,.17)}
-.hero-card h1{margin:12px 0;font-size:clamp(2.2rem,8vw,4.5rem)}
-.hero-card .subtitle{margin:15px auto 22px}
-.letter p{text-shadow:0 2px 8px rgba(0,0,0,.85)}
-@media(max-width:600px){.wrap{padding:0 15px 70px}.hero{min-height:95svh;padding-bottom:5svh}.hero-card{padding:22px 16px 25px;background:rgba(22,12,28,.32)}.hero-card h1{font-size:clamp(2rem,9vw,3.2rem)}.hero-card .subtitle{font-size:1.05rem;line-height:1.55}.hero-card button{padding:13px 18px;font-size:14px}.veil{background:linear-gradient(180deg,rgba(15,8,19,.08),rgba(15,8,19,.28) 75%,rgba(15,8,19,.42))}}
-</style></head><body><video autoplay muted loop playsinline aria-hidden="true"><source src="fond.mp4" type="video/mp4"></video><div class="veil"></div><main class="wrap"><div class="hero"><div class="hero-card"><div class="eyebrow">Un petit cadeau, du fond du cœur</div><h1>Christina & Tina ❤️</h1><p class="subtitle">Certaines rencontres ne font pas de bruit en arrivant… mais elles laissent une trace immense dans nos vies.</p><button id="open" type="button">Découvrez ce que je voulais vous dire 💌</button></div></div><section id="surprise" class="hidden" aria-label="Nos souvenirs et mon message"><div class="gallery"><img class="frame" id="photo" src="photo1.jpg" alt="Un souvenir partagé"><div class="count" id="count">1 / 9</div><div class="controls"><button type="button" id="prev" aria-label="Photo précédente">←</button><button type="button" id="next" aria-label="Photo suivante">→</button></div></div><article class="letter"><p>Il y a des personnes qu’on rencontre sans savoir à quel point elles vont compter.</p><p>Au début, ce sont des échanges, des rires, des instants qu’on croit ordinaires. Et puis un jour, on comprend que ces petits moments sont devenus de vrais souvenirs.</p><p class="highlight">Christina, Tina… vous faites partie de ces belles rencontres.</p><p>Je ne prends peut-être pas toujours le temps de vous le dire. Alors aujourd’hui, j’ai voulu m’arrêter un instant, juste pour vous.</p><p class="highlight">Vous avez une place précieuse dans ma vie.</p><p>J’aime penser à tous ces moments simples, à ces sourires, à ces souvenirs que personne ne pourra vivre exactement comme nous les avons vécus.</p><p>Je ne sais pas ce que demain nous réserve. Nos chemins peuvent changer, nos journées devenir plus chargées, et la distance parfois s’installer.</p><p>Mais ce que vous avez apporté à ma vie, personne ne pourra l’effacer. Parce que certaines personnes laissent quelque chose de beau en nous, simplement en étant elles-mêmes.</p><p>Si ce petit site vous fait sourire, même une seconde, alors il aura déjà rempli sa mission.</p><p class="highlight">Merci pour votre présence. Merci pour ce que vous êtes. Et merci pour tous les souvenirs qu’il nous reste encore à créer.</p><p class="signature">Avec toute mon affection,<br>Hariph ❤️</p></article></section><div class="footer">Fait avec le cœur, pour Christina et Tina.</div></main><script>
-const photos=Array.from({length:9},(_,i)=>`photo${i+1}.jpg`);let current=0,timer;const img=document.getElementById('photo');const count=document.getElementById('count');function show(n){current=(n+photos.length)%photos.length;img.classList.add('fade');setTimeout(()=>{img.src=photos[current];img.alt=`Souvenir ${current+1} sur ${photos.length}`;count.textContent=`${current+1} / ${photos.length}`;img.classList.remove('fade')},250)}function start(){clearInterval(timer);timer=setInterval(()=>show(current+1),4500)}document.getElementById('open').addEventListener('click',()=>{document.getElementById('surprise').classList.remove('hidden');document.getElementById('open').hidden=true;document.getElementById('surprise').scrollIntoView({behavior:'smooth'});start()});document.getElementById('prev').addEventListener('click',()=>{show(current-1);start()});document.getElementById('next').addEventListener('click',()=>{show(current+1);start()});
-</script></body></html>
+    /* Ordre des couches : vidéo (0), voile (1), contenu (2). */
+    .background-video { position: fixed; inset: 0; width: 100%; height: 100%; height: 100dvh; object-fit: cover; z-index: 0; pointer-events: none; }
+    .veil { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(15,8,19,.10), rgba(15,8,19,.26) 55%, rgba(15,8,19,.46)); }
+    .wrap { position: relative; z-index: 2; max-width: 820px; margin: auto; padding: 0 22px 90px; text-align: center; }
+
+    .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6vh; padding-bottom: 6svh; }
+    .hero-card { width: 100%; padding: 24px 20px 28px; border: 1px solid rgba(255,225,237,.27); border-radius: 24px; background: rgba(22,12,28,.30); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); box-shadow: 0 12px 36px rgba(0,0,0,.2); }
+    .eyebrow { letter-spacing: .22em; text-transform: uppercase; font: 12px Arial, sans-serif; color: #ffd0df; }
+    h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); margin: 12px 0; color: #ffe0ea; line-height: 1.1; text-shadow: 0 2px 12px #0009; }
+    .subtitle { font-size: clamp(1.05rem, 3vw, 1.35rem); line-height: 1.65; max-width: 580px; margin: 15px auto 22px; text-shadow: 0 2px 9px #000b; }
+    button { border: 1px solid #f4c7d8; background: #edb4c9; color: #29111e; padding: 14px 23px; border-radius: 50px; font-size: 15px; cursor: pointer; }
+    button:hover { background: #ffe2eb; }
+    button:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+    .hidden { display: none; }
+
+    .gallery { margin: 35px auto; max-width: 480px; }
+    .frame { display: block; width: 100%; height: min(62vh, 580px); height: min(62svh, 580px); object-fit: contain; border-radius: 20px; background: rgba(0,0,0,.35); box-shadow: 0 12px 45px #0009; transition: opacity .5s; }
+    .frame.fade { opacity: 0; }
+    .count { font: 13px Arial, sans-serif; color: #ffe1eb; margin: 12px; }
+    .controls { display: flex; justify-content: center; gap: 12px; }
+    .controls button { padding: 9px 18px; }
+    .letter { max-width: 670px; margin: 55px auto; padding: 8px 18px; border-radius: 22px; background: rgba(22,12,28,.35); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+    .letter p { font-size: clamp(1.1rem, 2.8vw, 1.35rem); line-height: 1.95; margin: 36px 0; text-shadow: 0 2px 9px #000d; }
+    .letter .highlight { font-size: clamp(1.35rem, 3.5vw, 1.8rem); color: #ffd2e0; font-weight: bold; }
+    .signature { color: #ffd2e0; font-style: italic; }
+    .footer { font: 12px Arial, sans-serif; color: #ffe1eb; margin-top: 60px; text-shadow: 0 2px 8px #000; }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 0 15px 70px; }
+      .hero { padding-bottom: 5svh; }
+      .hero-card { padding: 20px 14px 24px; background: rgba(22,12,28,.27); }
+      h1 { font-size: clamp(2rem, 9vw, 3.2rem); }
+      .subtitle { font-size: 1.05rem; line-height: 1.55; }
+      .hero-card button { padding: 13px 18px; font-size: 14px; }
+      .veil { background: linear-gradient(180deg, rgba(15,8,19,.07), rgba(15,8,19,.23) 70%, rgba(15,8,19,.42)); }
+      .letter { padding: 4px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .frame { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <video class="background-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="fond.mp4" type="video/mp4">
+  </video>
+  <div class="veil" aria-hidden="true"></div>
+  <main class="wrap">
+    <div class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Un petit cadeau, du fond du cœur</div>
+        <h1>Christina &amp; Tina ❤️</h1>
+        <p class="subtitle">Certaines rencontres ne font pas de bruit en arrivant… mais elles laissent une trace immense dans nos vies.</p>
+        <button id="open" type="button">Découvrez ce que je voulais vous dire 💌</button>
+      </div>
+    </div>
+    <section id="surprise" class="hidden" aria-label="Nos souvenirs et mon message">
+      <div class="gallery">
+        <img class="frame" id="photo" src="photo1.jpg" alt="Un souvenir partagé">
+        <div class="count" id="count" aria-live="polite">1 / 9</div>
+        <div class="controls">
+          <button type="button" id="prev" aria-label="Photo précédente">←</button>
+          <button type="button" id="next" aria-label="Photo suivante">→</button>
+        </div>
+      </div>
+      <article class="letter">
+        <p>Il y a des personnes qu’on rencontre sans savoir à quel point elles vont compter.</p>
+        <p>Au début, ce sont des échanges, des rires, des instants qu’on croit ordinaires. Et puis un jour, on comprend que ces petits moments sont devenus de vrais souvenirs.</p>
+        <p class="highlight">Christina, Tina… vous faites partie de ces belles rencontres.</p>
+        <p>Je ne prends peut-être pas toujours le temps de vous le dire. Alors aujourd’hui, j’ai voulu m’arrêter un instant, juste pour vous.</p>
+        <p class="highlight">Vous avez une place précieuse dans ma vie.</p>
+        <p>J’aime penser à tous ces moments simples, à ces sourires, à ces souvenirs que personne ne pourra vivre exactement comme nous les avons vécus.</p>
+        <p>Je ne sais pas ce que demain nous réserve. Nos chemins peuvent changer, nos journées devenir plus chargées, et la distance parfois s’installer.</p>
+        <p>Mais ce que vous avez apporté à ma vie, personne ne pourra l’effacer. Parce que certaines personnes laissent quelque chose de beau en nous, simplement en étant elles-mêmes.</p>
+        <p>Si ce petit site vous fait sourire, même une seconde, alors il aura déjà rempli sa mission.</p>
+        <p class="highlight">Merci pour votre présence. Merci pour ce que vous êtes. Et merci pour tous les souvenirs qu’il nous reste encore à créer.</p>
+        <p class="signature">Avec toute mon affection,<br>Hariph ❤️</p>
+      </article>
+    </section>
+    <div class="footer">Fait avec le cœur, pour Christina et Tina.</div>
+  </main>
+  <script>
+    const photos = Array.from({length: 9}, (_, i) => `photo${i + 1}.jpg`);
+    let current = 0;
+    let timer = null;
+    let fadeTimer = null;
+    const img = document.getElementById('photo');
+    const count = document.getElementById('count');
+
+    function show(n) {
+      current = (n + photos.length) % photos.length;
+      clearTimeout(fadeTimer);
+      img.classList.add('fade');
+      fadeTimer = setTimeout(() => {
+        img.src = photos[current];
+        img.alt = `Souvenir ${current + 1} sur ${photos.length}`;
+        count.textContent = `${current + 1} / ${photos.length}`;
+        img.classList.remove('fade');
+      }, 250);
+    }
+    function start() {
+      clearInterval(timer);
+      timer = setInterval(() => show(current + 1), 4500);
+    }
+    document.getElementById('open').addEventListener('click', () => {
+      document.getElementById('surprise').classList.remove('hidden');
+      document.getElementById('open').hidden = true;
+      document.getElementById('surprise').scrollIntoView({behavior: 'smooth'});
+      start();
+    });
+    document.getElementById('prev').addEventListener('click', () => { show(current - 1); start(); });
+    document.getElementById('next').addEventListener('click', () => { show(current + 1); start(); });
+  </script>
+</body>
+</html>
