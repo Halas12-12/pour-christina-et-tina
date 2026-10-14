@@ -11,10 +11,11 @@
 :root {
   color-scheme: dark;
   --rose: #ffd7e5;
-  --fond: rgba(22, 12, 28, .52);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
@@ -25,10 +26,9 @@ html, body {
 }
 
 body {
-  position: relative;
   isolation: isolate;
-  color: #fff7f9;
   background: #160d19;
+  color: #fff7f9;
   font-family: Georgia, serif;
 }
 
@@ -41,27 +41,24 @@ body {
   height: 100dvh;
   object-fit: cover;
   z-index: -2;
+  pointer-events: none;
 }
 
 .video-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(12, 5, 17, .12),
-    rgba(12, 5, 17, .32)
-  );
+  background: rgba(12, 5, 17, .16);
   z-index: -1;
   pointer-events: none;
 }
 
-/* ECRAN PRINCIPAL */
+/* APPLICATION SANS DEFILEMENT GLOBAL */
 .app {
+  position: relative;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  position: relative;
 }
 
 /* PAGE D'ACCUEIL */
@@ -69,83 +66,96 @@ body {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
-  padding: 20px 20px 6vh;
-  transition: opacity .8s ease, transform .8s ease;
+  align-items: flex-end;
+  padding: 20px 16px 5dvh;
   z-index: 3;
+  transition: opacity .8s, transform .8s;
 }
 
 .welcome-card {
-  width: min(100%, 740px);
+  width: min(100%, 700px);
   text-align: center;
-  padding: 25px 22px;
-  border-radius: 25px;
+  padding: 25px 20px;
+  border-radius: 22px;
   background: rgba(20, 9, 25, .35);
   border: 1px solid rgba(255, 220, 235, .25);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .eyebrow {
   font: 12px Arial, sans-serif;
-  letter-spacing: .22em;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--rose);
 }
 
 h1 {
-  font-size: clamp(2rem, 7vw, 4.8rem);
   color: var(--rose);
-  margin: 14px 0;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  margin: 15px 0;
 }
 
 .subtitle {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
   line-height: 1.6;
   margin: 15px auto 22px;
-  max-width: 580px;
 }
 
 button {
-  cursor: pointer;
   border: 1px solid #ffd6e4;
   border-radius: 40px;
-  padding: 13px 22px;
   background: #edb4c9;
   color: #29111e;
-  font-size: 15px;
-  transition: background .2s, transform .2s;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 button:hover {
   background: #ffe1eb;
 }
 
-button:active {
-  transform: scale(.96);
-}
-
-/* TRANSITION DE L'ACCUEIL */
 .app.opened .welcome {
   opacity: 0;
-  transform: translateY(-35px);
+  transform: translateY(-30px);
   pointer-events: none;
 }
 
-/* ESPACE PHOTO + TEXTE */
+/*
+  DEUX CARRES IDENTIQUES.
+
+  Chaque carré mesure au maximum :
+  - la moitié de la hauteur disponible ;
+  - la moitié de la largeur disponible.
+
+  Les deux restent côte à côte.
+*/
 .memory-layout {
+  --gap: clamp(8px, 2vw, 24px);
+  --side: min(
+    48dvh,
+    calc((100vw - 32px - var(--gap)) / 2),
+    440px
+  );
+
   position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 22px;
-  padding: 30px;
-  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: 3dvh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--gap);
+
+  padding: 0 16px;
+
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity .8s ease, visibility .8s;
+
+  transition: opacity .8s, visibility .8s;
 }
 
 .app.opened .memory-layout {
@@ -155,75 +165,78 @@ button:active {
   transition-delay: .3s;
 }
 
-/* TEXTE A GAUCHE */
+/* CARRE DE TEXTE A GAUCHE */
 .text-panel {
-  grid-column: 1;
-  grid-row: 1;
-  height: min(88dvh, 850px);
-  min-height: 0;
-  overflow: hidden;
+  width: var(--side);
+  height: var(--side);
+  flex: 0 0 var(--side);
+
   display: flex;
   flex-direction: column;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 220, 235, .24);
-  background: var(--fond);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, .22);
-  transform: translateX(-65px);
+  min-height: 0;
+  overflow: hidden;
+
+  border-radius: 18px;
+  border: 1px solid rgba(255, 220, 235, .3);
+  background: rgba(20, 9, 25, .68);
+  backdrop-filter: blur(5px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+
   opacity: 0;
-  transition: transform 1s ease, opacity 1s ease;
+  transform: translateX(-50px);
+  transition: transform 1s, opacity 1s;
 }
 
 .app.opened .text-panel {
-  transform: translateX(0);
   opacity: 1;
+  transform: translateX(0);
 }
 
 .text-heading {
   flex-shrink: 0;
-  padding: 22px 20px 15px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 220, 235, .15);
+  padding: 14px 10px 10px;
+  border-bottom: 1px solid rgba(255, 220, 235, .2);
 }
 
 .text-heading h2 {
   margin: 0;
-  font-size: clamp(1.2rem, 2.7vw, 1.8rem);
+  font-size: clamp(.95rem, 2vw, 1.4rem);
   color: var(--rose);
 }
 
 .text-heading small {
   display: block;
-  margin-top: 8px;
-  font: 12px Arial, sans-serif;
+  margin-top: 5px;
+  font: 11px Arial, sans-serif;
   color: #f4d3df;
 }
 
-/* SEULE CETTE ZONE DEFILERA */
+/* SEUL LE TEXTE DEFILE */
 .letter-scroll {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 10px 28px 35px;
+
+  padding: 8px 20px 22px;
+
   scrollbar-width: thin;
   scrollbar-color: #e9a9c0 transparent;
 }
 
 .letter-scroll p {
-  font-size: clamp(1rem, 1.8vw, 1.23rem);
-  line-height: 1.85;
-  margin: 27px 0;
   text-align: center;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, .45);
+  font-size: clamp(.9rem, 1.5vw, 1.12rem);
+  line-height: 1.75;
+  margin: 22px 0;
 }
 
-.letter-scroll .highlight {
+.highlight {
   color: var(--rose);
   font-weight: bold;
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
 .signature {
@@ -231,46 +244,52 @@ button:active {
   font-style: italic;
 }
 
-/* PHOTOS A DROITE */
+/* CARRE PHOTO A DROITE */
 .photo-panel {
-  grid-column: 2;
-  grid-row: 1;
-  height: min(88dvh, 850px);
-  min-width: 0;
+  width: var(--side);
+  height: var(--side);
+  flex: 0 0 var(--side);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
-  transform: translateX(-50px) scale(.94);
+
   opacity: 0;
-  transition: transform 1.1s ease, opacity 1s ease;
+  transform: translateX(-50px) scale(.95);
+  transition: transform 1.1s, opacity 1s;
 }
 
 .app.opened .photo-panel {
-  transform: translateX(0) scale(1);
   opacity: 1;
+  transform: translateX(0) scale(1);
 }
 
+/*
+  AUCUN FOND SUR LA PHOTO.
+  L'IMAGE GARDE SES PROPORTIONS.
+*/
 .photo-frame {
   width: 100%;
   flex: 1;
   min-height: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 24px;
-  background: rgba(18, 9, 24, .25);
-  border: 1px solid rgba(255, 220, 235, .16);
+  align-items: center;
   overflow: hidden;
-  backdrop-filter: blur(2px);
+
+  background: transparent;
+  border: none;
+  border-radius: 14px;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .photo-frame img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: opacity .35s ease;
+  transition: opacity .35s;
 }
 
 .photo-frame img.fade {
@@ -279,27 +298,28 @@ button:active {
 
 .photo-controls {
   flex-shrink: 0;
+  height: 45px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 8px;
-  border-radius: 30px;
-  background: rgba(20, 9, 25, .42);
+  align-items: center;
+  gap: 10px;
 }
 
 .photo-controls button {
-  padding: 9px 18px;
+  padding: 7px 13px;
+  font-size: 13px;
 }
 
 .photo-count {
-  font: 13px Arial, sans-serif;
-  min-width: 40px;
+  min-width: 35px;
   text-align: center;
+  font: 12px Arial, sans-serif;
+  text-shadow: 0 2px 5px #000;
 }
 
-/* TELEPHONE */
+/* ADAPTATION AUX TELEPHONES */
 @media (max-width: 650px) {
+
   .welcome {
     padding: 12px 12px 5dvh;
   }
@@ -314,7 +334,6 @@ button:active {
 
   .welcome .subtitle {
     font-size: .98rem;
-    line-height: 1.5;
   }
 
   .welcome button {
@@ -323,68 +342,58 @@ button:active {
   }
 
   .memory-layout {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
-    gap: 8px;
-    padding: 12px 7px;
-  }
+    --gap: 8px;
+    --side: min(
+      47dvh,
+      calc((100vw - 22px - var(--gap)) / 2)
+    );
 
-  .text-panel,
-  .photo-panel {
-    height: calc(100dvh - 24px);
-    max-height: none;
+    bottom: 5dvh;
+    padding: 0 7px;
   }
 
   .text-panel {
-    border-radius: 14px;
-    backdrop-filter: blur(4px);
+    border-radius: 12px;
   }
 
   .text-heading {
-    padding: 13px 7px 10px;
+    padding: 9px 4px 7px;
   }
 
   .text-heading h2 {
-    font-size: 1rem;
+    font-size: .9rem;
   }
 
   .text-heading small {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .letter-scroll {
-    padding: 5px 10px 20px;
+    padding: 4px 8px 12px;
   }
 
   .letter-scroll p {
-    font-size: clamp(.82rem, 3.4vw, 1rem);
-    line-height: 1.65;
-    margin: 22px 0;
-  }
-
-  .letter-scroll .highlight {
-    font-size: clamp(.91rem, 3.7vw, 1.1rem);
-  }
-
-  .photo-panel {
-    gap: 8px;
+    font-size: clamp(.78rem, 3vw, .95rem);
+    line-height: 1.55;
+    margin: 16px 0;
   }
 
   .photo-frame {
-    border-radius: 14px;
+    border-radius: 10px;
   }
 
   .photo-controls {
-    gap: 5px;
-    padding: 5px;
+    height: 34px;
+    gap: 4px;
   }
 
   .photo-controls button {
-    padding: 8px 10px;
+    padding: 5px 9px;
     font-size: 12px;
   }
 
   .photo-count {
-    font-size: 11px;
+    font-size: 10px;
     min-width: 28px;
   }
 }
@@ -392,7 +401,6 @@ button:active {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
   }
 }
 </style>
@@ -400,7 +408,7 @@ button:active {
 
 <body>
 
-<!-- VIDEO DE FOND -->
+<!-- VIDEO -->
 <video
   class="background-video"
   autoplay
@@ -417,7 +425,8 @@ button:active {
 <main class="app" id="app">
 
   <!-- ACCUEIL -->
-  <section class="welcome" id="welcome">
+  <section class="welcome">
+
     <div class="welcome-card">
 
       <div class="eyebrow">
@@ -427,8 +436,9 @@ button:active {
       <h1>Christina & Tina ❤️</h1>
 
       <p class="subtitle">
-        Certaines rencontres ne font pas de bruit en arrivant…
-        mais elles laissent une trace immense dans nos vies.
+        Certaines rencontres ne font pas de bruit
+        en arrivant… mais elles laissent une trace
+        immense dans nos vies.
       </p>
 
       <button id="open" type="button">
@@ -436,33 +446,34 @@ button:active {
       </button>
 
     </div>
+
   </section>
 
-  <!-- PRESENTATION APRES LE CLIC -->
-  <section class="memory-layout" id="memories"
-           aria-label="Nos souvenirs et mon message">
+  <!-- DEUX CARRES -->
+  <section class="memory-layout" id="memories">
 
     <!-- TEXTE A GAUCHE -->
     <article class="text-panel">
 
       <header class="text-heading">
         <h2>À vous deux ❤️</h2>
-        <small>Faites défiler le texte pour lire la suite ↓</small>
+        <small>Faites défiler pour lire ↓</small>
       </header>
 
-      <div class="letter-scroll" id="letterScroll"
-           tabindex="0" aria-label="Lettre pour Christina et Tina">
+      <div class="letter-scroll"
+           id="letterScroll"
+           tabindex="0">
 
         <p>
-          Il y a des personnes qu’on rencontre sans savoir
-          à quel point elles vont compter.
+          Il y a des personnes qu’on rencontre
+          sans savoir à quel point elles vont compter.
         </p>
 
         <p>
           Au début, ce sont des échanges, des rires,
           des instants qu’on croit ordinaires.
-          Et puis un jour, on comprend que ces petits
-          moments sont devenus de vrais souvenirs.
+          Et puis un jour, on comprend que ces
+          petits moments sont devenus de vrais souvenirs.
         </p>
 
         <p class="highlight">
@@ -471,9 +482,10 @@ button:active {
         </p>
 
         <p>
-          Je ne prends peut-être pas toujours le temps
-          de vous le dire. Alors aujourd’hui,
-          j’ai voulu m’arrêter un instant, juste pour vous.
+          Je ne prends peut-être pas toujours
+          le temps de vous le dire.
+          Alors aujourd’hui, j’ai voulu m’arrêter
+          un instant, juste pour vous.
         </p>
 
         <p class="highlight">
@@ -523,7 +535,7 @@ button:active {
       </div>
     </article>
 
-    <!-- PHOTOS A DROITE -->
+    <!-- PHOTO A DROITE -->
     <aside class="photo-panel">
 
       <div class="photo-frame">
@@ -538,12 +550,15 @@ button:active {
         <button id="prev" type="button"
                 aria-label="Photo précédente">←</button>
 
-        <span class="photo-count" id="count">1 / 9</span>
+        <span class="photo-count" id="count">
+          1 / 9
+        </span>
 
         <button id="next" type="button"
                 aria-label="Photo suivante">→</button>
 
       </div>
+
     </aside>
 
   </section>
@@ -597,7 +612,6 @@ openButton.addEventListener("click", () => {
   if (opened) return;
 
   opened = true;
-
   app.classList.add("opened");
 
   document.getElementById("letterScroll").scrollTop = 0;
@@ -615,28 +629,22 @@ document.getElementById("next").addEventListener("click", () => {
   startSlideshow();
 });
 
-/* Relancer la vidéo si le navigateur l'autorise */
-video.play().catch(() => {
-  // Certains navigateurs bloquent la lecture automatique.
-});
+video.play().catch(() => {});
 
-/* Eviter le défilement de la page entière */
+/* BLOQUER LE DEFILEMENT HORS DU TEXTE */
 document.addEventListener("wheel", (event) => {
-  const textArea = event.target.closest(".letter-scroll");
-
-  if (!textArea) {
+  if (!event.target.closest(".letter-scroll")) {
     event.preventDefault();
   }
 }, { passive: false });
 
 document.addEventListener("touchmove", (event) => {
-  const textArea = event.target.closest(".letter-scroll");
-
-  if (!textArea) {
+  if (!event.target.closest(".letter-scroll")) {
     event.preventDefault();
   }
 }, { passive: false });
 
 </script>
+
 </body>
 </html>
