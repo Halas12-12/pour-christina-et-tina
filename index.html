@@ -3,117 +3,137 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#160d19">
+
 <title>Christina & Tina ❤️</title>
 
 <style>
 :root {
-  color-scheme: dark;
   --rose: #ffd7e5;
-  --screen: 100dvh;
+  --screen-height: 100dvh;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
   overflow: hidden;
   overscroll-behavior: none;
 }
 
 body {
-  isolation: isolate;
   background: #160d19;
   color: #fff7f9;
-  font-family: Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-/* VIDEO EN FOND */
+/* VIDEO EN ARRIERE-PLAN */
+
 .background-video {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
+  height: 100dvh;
   object-fit: cover;
-  z-index: -2;
+  z-index: 0;
   pointer-events: none;
 }
 
 .video-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 5, 17, .16);
-  z-index: -1;
+  background: rgba(12, 5, 17, 0.12);
+  z-index: 1;
   pointer-events: none;
 }
 
+/* APPLICATION */
+
 .app {
   position: relative;
+  z-index: 2;
   width: 100%;
   height: 100vh;
-  height: var(--screen);
+  height: var(--screen-height);
   overflow: hidden;
 }
 
-/* ACCUEIL */
+/* PAGE D'ACCUEIL */
+
 .welcome {
   position: absolute;
   inset: 0;
+  z-index: 5;
+
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 14px 14px 5dvh;
-  z-index: 3;
-  transition: opacity .75s ease, transform .75s ease;
+
+  padding: 16px 16px 6dvh;
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .welcome-card {
-  width: min(100%, 700px);
-  max-height: 90%;
+  width: min(100%, 680px);
+  max-height: 85dvh;
   overflow-y: auto;
-  padding: clamp(16px, 3vw, 26px);
+
+  padding: 24px 20px;
   border-radius: 22px;
+
   text-align: center;
-  background: rgba(20, 9, 25, .36);
-  border: 1px solid rgba(255, 220, 235, .25);
+
+  background: rgba(20, 9, 25, 0.38);
+  border: 1px solid rgba(255, 220, 235, 0.25);
+
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 .eyebrow {
-  font: 11px Arial, sans-serif;
-  letter-spacing: .18em;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--rose);
 }
 
 h1 {
-  margin: 14px 0;
+  margin: 15px 0;
+  font-size: clamp(2rem, 7vw, 4.5rem);
   color: var(--rose);
-  font-size: clamp(1.8rem, 7vw, 4.5rem);
 }
 
 .subtitle {
-  max-width: 570px;
-  margin: 14px auto 22px;
-  font-size: clamp(.95rem, 2.5vw, 1.25rem);
-  line-height: 1.55;
+  margin: 15px auto 22px;
+  max-width: 550px;
+
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  line-height: 1.6;
 }
 
 button {
-  min-height: 40px;
   border: 1px solid #ffd6e4;
   border-radius: 40px;
+
   background: #edb4c9;
   color: #29111e;
-  padding: 10px 16px;
-  font-size: 14px;
+
+  padding: 11px 18px;
+
   font-family: Arial, sans-serif;
+  font-size: 14px;
+
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -122,77 +142,86 @@ button:hover {
   background: #ffe1eb;
 }
 
-button:focus-visible,
-.letter-scroll:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 2px;
-}
-
 .app.opened .welcome {
   opacity: 0;
   transform: translateY(-30px);
   pointer-events: none;
 }
 
-/* DEUX CARRES IDENTIQUES */
+/* ==================================
+   ZONE TEXTE + ZONE PHOTO
+   ================================== */
+
 .memory-layout {
-  --gap: clamp(6px, 1.8vw, 20px);
-  --margin: clamp(7px, 2vw, 20px);
-  --bottom: 2dvh;
-
-  --side: min(
-    46dvh,
-    calc((100vw - 2 * var(--margin) - var(--gap)) / 2),
-    440px
-  );
-
   position: absolute;
+
   left: 0;
   right: 0;
-  bottom: var(--bottom);
+  bottom: 3dvh;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: var(--gap);
-  padding: 0 var(--margin);
+  width: 100%;
+  height: 45dvh;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  align-items: stretch;
+
+  gap: clamp(8px, 2vw, 20px);
+
+  padding: 0 clamp(12px, 4vw, 45px);
 
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity .8s ease, visibility .8s;
+
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s;
 }
 
 .app.opened .memory-layout {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition-delay: .25s;
+  transition-delay: 0.25s;
 }
 
-/* CARRE DE TEXTE */
+/* ==================================
+   ZONE DE TEXTE A GAUCHE
+   ================================== */
+
 .text-panel {
-  width: var(--side);
-  height: var(--side);
-  flex: 0 0 var(--side);
+  width: 100%;
+  height: 100%;
+
   min-width: 0;
   min-height: 0;
 
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
 
-  border: 1px solid rgba(255, 220, 235, .35);
-  border-radius: clamp(9px, 1.5vw, 18px);
-  background: rgba(20, 9, 25, .75);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 220, 235, 0.35);
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+  background: rgba(20, 9, 25, 0.76);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20);
 
   opacity: 0;
   transform: translateX(-45px);
-  transition: opacity .9s ease, transform .9s ease;
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
 }
 
 .app.opened .text-panel {
@@ -202,42 +231,56 @@ button:focus-visible,
 
 .text-heading {
   flex-shrink: 0;
-  padding: clamp(7px, 1.4vw, 15px) 5px;
+
+  padding: 14px 8px 10px;
+
   text-align: center;
-  border-bottom: 1px solid rgba(255, 220, 235, .18);
+
+  border-bottom: 1px solid rgba(255, 220, 235, 0.20);
 }
 
 .text-heading h2 {
   margin: 0;
-  font-size: clamp(.85rem, 1.8vw, 1.35rem);
+
+  font-size: clamp(1rem, 2vw, 1.45rem);
   color: var(--rose);
 }
 
 .text-heading small {
   display: block;
   margin-top: 5px;
-  font: clamp(9px, .9vw, 11px) Arial, sans-serif;
+
+  font-family: Arial, sans-serif;
+  font-size: 11px;
   color: #f4d3df;
 }
 
-/* SEUL LE TEXTE DEFILE */
+/* DEFILEMENT DU TEXTE UNIQUEMENT */
+
 .letter-scroll {
   flex: 1;
   min-height: 0;
+
   overflow-y: auto;
+  overflow-x: hidden;
+
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
-  padding: 5px clamp(9px, 2vw, 22px) 20px;
+  padding: 8px clamp(12px, 2vw, 24px) 24px;
+
   scrollbar-width: thin;
   scrollbar-color: #e9a9c0 transparent;
 }
 
 .letter-scroll p {
-  margin: clamp(15px, 2vw, 23px) 0;
+  margin: 20px 0;
+
   text-align: center;
-  font-size: clamp(.85rem, 1.5vw, 1.12rem);
-  line-height: 1.65;
+
+  font-size: clamp(0.92rem, 1.6vw, 1.15rem);
+  line-height: 1.7;
+
   overflow-wrap: break-word;
 }
 
@@ -251,114 +294,233 @@ button:focus-visible,
   font-style: italic;
 }
 
-/* CARRE PHOTO */
+/* ==================================
+   ZONE PHOTO A DROITE
+   ================================== */
+
 .photo-panel {
-  width: var(--side);
-  height: var(--side);
-  flex: 0 0 var(--side);
+  width: 100%;
+  height: 100%;
+
   min-width: 0;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   opacity: 0;
-  transform: translateX(-45px) scale(.96);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateX(-45px);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
 }
 
 .app.opened .photo-panel {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: translateX(0);
 }
 
-/* AUCUN FOND AJOUTE AUX PHOTOS */
+/* PHOTO SANS FOND TRANSPARENT AJOUTE */
+
 .photo-frame {
   width: 100%;
   flex: 1;
   min-height: 0;
+
   overflow: hidden;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;
+  border-radius: 14px;
 
   background: none;
-  border: none;
   box-shadow: none;
   backdrop-filter: none;
 }
 
 .photo-frame img {
   display: block;
+
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  transition: opacity .35s ease;
+
+  /*
+    La photo remplit la zone.
+    Aucun étirement des visages.
+    Léger recadrage possible.
+  */
+  object-fit: cover;
+  object-position: center;
+
+  transition: opacity 0.35s ease;
 }
 
 .photo-frame img.fade {
   opacity: 0;
 }
 
+/* BOUTONS PHOTOS */
+
 .photo-controls {
-  height: clamp(32px, 5dvh, 44px);
   flex-shrink: 0;
+
+  height: 45px;
+
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: clamp(3px, 1vw, 12px);
+  align-items: center;
+
+  gap: 10px;
 }
 
 .photo-controls button {
-  min-height: 30px;
-  padding: 5px 12px;
-  font-size: 13px;
+  min-width: 40px;
+  min-height: 35px;
+
+  padding: 6px 12px;
+  font-size: 14px;
 }
 
 .photo-count {
-  min-width: 32px;
-  font: 12px Arial, sans-serif;
+  min-width: 38px;
+
   text-align: center;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+
   text-shadow: 0 2px 5px #000;
 }
 
-/* TELEPHONES */
+/* ==================================
+   VERSION TELEPHONE
+   ================================== */
+
 @media (max-width: 650px) {
+
+  .welcome {
+    padding: 12px 12px 6dvh;
+  }
+
+  .welcome-card {
+    padding: 20px 14px;
+  }
+
+  .welcome h1 {
+    font-size: clamp(1.9rem, 9vw, 3rem);
+  }
+
+  .welcome .subtitle {
+    font-size: 0.98rem;
+  }
+
+  .welcome button {
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+
+  /*
+    Deux zones toujours côte à côte.
+    Même largeur.
+    Même hauteur.
+    Positionnées dans la moitié basse.
+  */
+
   .memory-layout {
-    --gap: 7px;
-    --margin: 7px;
-    --bottom: 3dvh;
-    --side: min(
-      46dvh,
-      calc((100vw - 21px) / 2)
-    );
+    left: 0;
+    right: 0;
+
+    bottom: 3dvh;
+
+    width: 100%;
+    height: 45dvh;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 8px;
+
+    padding: 0 9px;
   }
 
   .text-panel {
-    background: rgba(20, 9, 25, .82);
+    border-radius: 12px;
+    background: rgba(20, 9, 25, 0.82);
   }
 
   .text-heading {
-    padding: 8px 3px 6px;
+    padding: 10px 4px 8px;
   }
 
   .text-heading h2 {
-    font-size: clamp(.78rem, 3.3vw, 1rem);
+    font-size: clamp(0.85rem, 3.6vw, 1.1rem);
   }
 
   .text-heading small {
+    margin-top: 4px;
     font-size: 9px;
   }
 
   .letter-scroll {
-    padding: 3px 7px 12px;
+    padding: 5px 8px 15px;
   }
 
   .letter-scroll p {
-    font-size: clamp(.76rem, 3.15vw, .96rem);
-    line-height: 1.5;
+    font-size: clamp(0.79rem, 3.3vw, 0.95rem);
+    line-height: 1.55;
     margin: 15px 0;
+  }
+
+  .photo-frame {
+    border-radius: 12px;
+  }
+
+  .photo-frame img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .photo-controls {
+    height: 38px;
+    gap: 5px;
+  }
+
+  .photo-controls button {
+    min-width: 34px;
+    min-height: 32px;
+
+    padding: 5px 9px;
+    font-size: 12px;
+  }
+
+  .photo-count {
+    min-width: 30px;
+    font-size: 11px;
+  }
+}
+
+/* PETITS TELEPHONES */
+
+@media (max-width: 360px) {
+
+  .memory-layout {
+    gap: 6px;
+    padding: 0 6px;
+  }
+
+  .letter-scroll {
+    padding: 4px 6px 12px;
+  }
+
+  .letter-scroll p {
+    font-size: 0.78rem;
+    line-height: 1.48;
+    margin: 12px 0;
+  }
+
+  .text-heading h2 {
+    font-size: 0.82rem;
   }
 
   .photo-controls {
@@ -366,50 +528,29 @@ button:focus-visible,
   }
 
   .photo-controls button {
-    min-height: 30px;
-    padding: 5px 9px;
-    font-size: 12px;
-  }
-
-  .photo-count {
-    min-width: 27px;
-    font-size: 10px;
-  }
-}
-
-/* TRES PETITS TELEPHONES */
-@media (max-width: 360px) {
-  .letter-scroll {
-    padding: 3px 5px 10px;
-  }
-
-  .letter-scroll p {
-    font-size: .76rem;
-    line-height: 1.45;
-    margin: 12px 0;
-  }
-
-  .text-heading small {
-    font-size: 8px;
-  }
-
-  .photo-controls button {
     padding: 4px 7px;
   }
 }
 
-/* TELEPHONES EN MODE PAYSAGE */
+/* TELEPHONE EN MODE PAYSAGE */
+
 @media (max-height: 450px) and (orientation: landscape) {
+
   .memory-layout {
-    --side: min(
-      44dvh,
-      calc((100vw - 40px) / 2)
-    );
-    --bottom: 2dvh;
+    height: 45dvh;
+    bottom: 2dvh;
   }
 
   .text-heading {
     padding: 5px;
+  }
+
+  .text-heading h2 {
+    font-size: 0.85rem;
+  }
+
+  .text-heading small {
+    font-size: 8px;
   }
 
   .letter-scroll p {
@@ -418,11 +559,16 @@ button:focus-visible,
   }
 
   .photo-controls {
-    height: 28px;
+    height: 29px;
+  }
+
+  .photo-controls button {
+    min-height: 25px;
+    padding: 3px 9px;
   }
 
   .welcome-card {
-    padding: 10px 16px;
+    padding: 10px 15px;
   }
 
   .welcome h1 {
@@ -432,13 +578,17 @@ button:focus-visible,
 
   .welcome .subtitle {
     margin: 7px auto;
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
 }
 
+/* ACCESSIBILITE */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: .01ms !important;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
   }
 }
 </style>
@@ -446,20 +596,29 @@ button:focus-visible,
 
 <body>
 
+<!-- VIDEO EN ARRIERE-PLAN -->
+
 <video
   class="background-video"
-  autoplay muted loop playsinline
+  autoplay
+  muted
+  loop
+  playsinline
   preload="auto"
   aria-hidden="true">
+
   <source src="./fond.mp4" type="video/mp4">
+
 </video>
 
 <div class="video-overlay"></div>
 
 <main class="app" id="app">
 
-  <!-- ACCUEIL -->
+  <!-- ECRAN D'ACCUEIL -->
+
   <section class="welcome" id="welcome">
+
     <div class="welcome-card">
 
       <div class="eyebrow">
@@ -479,22 +638,29 @@ button:focus-visible,
       </button>
 
     </div>
+
   </section>
 
-  <!-- LES DEUX CARRES -->
+  <!-- TEXTE ET PHOTOS -->
+
   <section class="memory-layout" id="memories">
 
-    <!-- TEXTE A GAUCHE -->
+    <!-- ZONE DE TEXTE A GAUCHE -->
+
     <article class="text-panel">
 
       <header class="text-heading">
+
         <h2>À vous deux ❤️</h2>
+
         <small>Faites défiler pour lire ↓</small>
+
       </header>
 
-      <div class="letter-scroll"
-           id="letterScroll"
-           tabindex="0">
+      <div
+        class="letter-scroll"
+        id="letterScroll"
+        tabindex="0">
 
         <p>
           Il y a des personnes qu’on rencontre
@@ -565,46 +731,68 @@ button:focus-visible,
         </p>
 
       </div>
+
     </article>
 
-    <!-- PHOTO A DROITE -->
+    <!-- ZONE PHOTO A DROITE -->
+
     <aside class="photo-panel">
 
       <div class="photo-frame">
+
         <img
           id="photo"
           src="./photo1.jpg"
           alt="Un souvenir partagé">
+
       </div>
 
       <div class="photo-controls">
-        <button id="prev" type="button"
-                aria-label="Photo précédente">←</button>
+
+        <button
+          id="prev"
+          type="button"
+          aria-label="Photo précédente">
+          ←
+        </button>
 
         <span class="photo-count" id="count">
           1 / 9
         </span>
 
-        <button id="next" type="button"
-                aria-label="Photo suivante">→</button>
+        <button
+          id="next"
+          type="button"
+          aria-label="Photo suivante">
+          →
+        </button>
+
       </div>
 
     </aside>
 
   </section>
+
 </main>
 
 <script>
 "use strict";
 
 const app = document.getElementById("app");
+
 const openButton = document.getElementById("open");
-const img = document.getElementById("photo");
-const count = document.getElementById("count");
-const video = document.querySelector(".background-video");
+
 const welcome = document.getElementById("welcome");
+
 const memories = document.getElementById("memories");
+
 const letterScroll = document.getElementById("letterScroll");
+
+const img = document.getElementById("photo");
+
+const count = document.getElementById("count");
+
+const video = document.querySelector(".background-video");
 
 const photos = Array.from(
   { length: 9 },
@@ -612,13 +800,19 @@ const photos = Array.from(
 );
 
 let current = 0;
+
 let timer = null;
+
 let transitionTimer = null;
+
 let opened = false;
 
 memories.inert = true;
 
+/* CHANGER LA PHOTO */
+
 function showPhoto(index) {
+
   clearTimeout(transitionTimer);
 
   current = (index + photos.length) % photos.length;
@@ -626,60 +820,95 @@ function showPhoto(index) {
   img.classList.add("fade");
 
   transitionTimer = setTimeout(() => {
+
     img.src = photos[current];
+
     img.alt = `Souvenir ${current + 1} sur ${photos.length}`;
-    count.textContent = `${current + 1} / ${photos.length}`;
+
+    count.textContent =
+      `${current + 1} / ${photos.length}`;
+
     img.classList.remove("fade");
+
   }, 350);
 }
 
+/* DIAPORAMA AUTOMATIQUE */
+
 function startSlideshow() {
+
   clearInterval(timer);
 
   timer = setInterval(() => {
+
     showPhoto(current + 1);
+
   }, 5000);
 }
 
+/* OUVRIR LE MESSAGE */
+
 openButton.addEventListener("click", () => {
+
   if (opened) return;
 
   opened = true;
+
   app.classList.add("opened");
 
   memories.inert = false;
+
   welcome.inert = true;
+
   letterScroll.scrollTop = 0;
 
   startSlideshow();
+
 });
+
+/* PHOTO PRECEDENTE */
 
 document.getElementById("prev").addEventListener("click", () => {
+
   showPhoto(current - 1);
+
   startSlideshow();
+
 });
+
+/* PHOTO SUIVANTE */
 
 document.getElementById("next").addEventListener("click", () => {
+
   showPhoto(current + 1);
+
   startSlideshow();
+
 });
 
-/* Lecture de la vidéo */
+/* VIDEO EN BOUCLE */
+
 video.play().catch(() => {});
 
-/* Bloquer le défilement hors du texte */
+/* INTERDIRE LE DEFILEMENT GLOBAL */
+
 document.addEventListener("wheel", (event) => {
+
   if (!event.target.closest(".letter-scroll")) {
     event.preventDefault();
   }
+
 }, { passive: false });
 
 document.addEventListener("touchmove", (event) => {
+
   if (!event.target.closest(".letter-scroll")) {
     event.preventDefault();
   }
+
 }, { passive: false });
 
 </script>
+
 </body>
 </html>
